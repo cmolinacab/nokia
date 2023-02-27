@@ -1,0 +1,27 @@
+# Version of Kubernetes API to be used
+apiVersion: apps/v1
+# type of resource
+kind: Deployment
+metadata:
+# name of the pod
+  name: nokia-viewer
+spec:
+  # defines the number of copies of the pods we want to run
+  replicas: 3
+  selector:
+    matchLabels:
+    # label to select all "dashboard-app" pods
+      app: nokia-viewer
+  template:
+    metadata:
+      labels:
+        # label “app=dashboard-app” to all pods created by this deployment
+        app: nokia-viewer
+    spec:
+      containers:
+        # name of the conatiner      
+      - name: nokia-viewer-container
+        # container image to run
+        image: gcr.io/nokia-viewer-315205/nokia_viewer:v1.23
+      imagePullSecrets:
+      - name: gcr-secret
